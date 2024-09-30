@@ -1,0 +1,39 @@
+name: React App Workflow
+
+# Trigger workflow on push or pull request to the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up Node.js (required for React apps)
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Use the version of Node.js your project requires
+
+    # Install dependencies using make install
+    - name: Install Dependencies
+      run: make install
+
+    # Run the server with make run and sleep to ensure the server has time to start
+    - name: Start Server
+      run: |
+        make run &
+        sleep 10
+
+    # You can add additional steps for testing here
+    # For example, if you have tests to run:
+    # - name: Run Tests
+    #   run: npm test # This can vary based on your test setup
+
