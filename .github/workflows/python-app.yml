@@ -30,7 +30,7 @@ jobs:
     - name: Start Server
       run: |
         make run &
-        sleep 10
+        sleep 30
 
     # You can add additional steps for testing here
     # For example, if you have tests to run:
